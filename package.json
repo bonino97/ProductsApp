@@ -1,0 +1,19 @@
+{
+  "name": "productsapp",
+  "version": "1.0.0",
+  "description": "Portal Jobs - Created with React & GraphQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "apollo-server": "^3.0.1",
+    "graphql": "^15.5.1"
+  }
+}
