@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { useRouter } from 'next/router';
+
 import { useFormik } from 'formik';
-import { IoMdLogIn } from 'react-icons/io';
-import { BiErrorCircle } from 'react-icons/bi';
 import * as Yup from 'yup';
-import { useQuery, useMutation, gql } from '@apollo/client';
+
+import { IoMdLogIn } from 'react-icons/io';
+import { BiErrorCircle, BiCheckCircle } from 'react-icons/bi';
+
+import { useMutation, gql } from '@apollo/client';
+
 import Layout from '../components/Layout';
 
-const QUERY = gql`
-  query GetProducts {
-    getProducts {
+const ADD_USER = gql`
+  mutation AddUser($addUserInput: UserInput) {
+    addUser(userInput: $addUserInput) {
       id
       name
-      price
-      stock
+      lastName
+      email
     }
   }
 `;
 
 const Register = () => {
+  // State to mannage error messages.
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  // State to mannage messages.
+  const [successMsg, setSuccessMsg] = useState(null);
+
+  //Mutation to create new users.
+  const [addUser] = useMutation(ADD_USER);
+
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -33,15 +50,59 @@ const Register = () => {
         .required('Password required.')
         .min(6, 'Password must contain more than six characters'),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const { name, lastName, email, password } = values;
+
+        const { data } = await addUser({
+          variables: {
+            addUserInput: {
+              name,
+              lastName,
+              email,
+              password,
+            },
+          },
+        });
+        if (data) {
+          setSuccessMsg(`User ${data.addUser.name} created successfully!`);
+
+          setTimeout(() => {
+            setSuccessMsg(null);
+            router.push('/login');
+          }, 3000);
+
+        }
+      } catch (error) {
+        setErrorMsg(error.message);
+        setTimeout(() => {
+          setErrorMsg(null);
+        }, 3000);
+      }
     },
   });
 
-  const { data, loading } = useQuery(QUERY);
-  console.log(data, loading);
+  const showErrorMessage = () => {
+    return (
+      <div className='bg-white py-2 px-3 w-full my-3 max-w-sm mx-auto border-red-500 border-l-4 rounded shadow animate-pulse'>
+        <div className='flex flex-column'>
+          <BiErrorCircle className='mt-1 mr-1 text-red-500'></BiErrorCircle>
+          <p className='text-red-500'>{errorMsg}</p>
+        </div>
+      </div>
+    );
+  };
 
-  if (loading) return 'Cargando...';
+  const showSuccessMessage = () => {
+    return (
+      <div className='bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto border-green-500 border-b-4 rounded shadow animate-pulse'>
+        <div className='flex flex-column'>
+          <BiCheckCircle className='mt-1 mr-1 text-green-500'></BiCheckCircle>
+          <p className='text-green-500'>{successMsg}</p>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Layout>
@@ -176,6 +237,8 @@ const Register = () => {
           </form>
         </div>
       </div>
+      {errorMsg ? showErrorMessage() : null}
+      {successMsg ? showSuccessMessage() : null}
     </Layout>
   );
 };

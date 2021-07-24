@@ -168,7 +168,7 @@ export const resolvers = {
             $search: productName,
           },
         }).limit(10);
-        
+
         return products;
       } catch (e) {
         console.error(e);
