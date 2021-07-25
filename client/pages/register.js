@@ -127,15 +127,15 @@ const Register = () => {
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 id='name'
                 placeholder='Name'
-                value={formik.values.name}
+                value={formik?.values?.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.error || formik.errors.name ? (
+              {formik?.touched?.error || formik?.errors?.name ? (
                 <div className='my-2 bg-red-100 border-l-4 border-red-500 text-red-700 shadow rounded p-2 text-center animate-pulse'>
                   <div className='flex flex-column inline-block'>
                     <BiErrorCircle className='mt-1 mr-1'></BiErrorCircle>
-                    <p>{formik.errors.name}</p>
+                    <p>{formik?.errors?.name}</p>
                   </div>
                 </div>
               ) : (
@@ -155,15 +155,15 @@ const Register = () => {
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 id='lastName'
                 placeholder='Last Name'
-                value={formik.values.lastName}
+                value={formik?.values?.lastName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.error || formik.errors.lastName ? (
+              {formik?.touched?.error || formik?.errors?.lastName ? (
                 <div className='my-2 bg-red-100 border-l-4 border-red-500 text-red-700 shadow rounded p-2 text-center animate-pulse'>
                   <div className='flex flex-column inline-block'>
                     <BiErrorCircle className='mt-1 mr-1'></BiErrorCircle>
-                    <p>{formik.errors.lastName}</p>
+                    <p>{formik?.errors?.lastName}</p>
                   </div>
                 </div>
               ) : (
@@ -183,15 +183,15 @@ const Register = () => {
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 id='email'
                 placeholder='Email'
-                value={formik.values.email}
+                value={formik?.values?.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.error || formik.errors.email ? (
+              {formik?.touched?.error || formik?.errors?.email ? (
                 <div className='my-2 bg-red-100 border-l-4 border-red-500 text-red-700 shadow rounded p-2 text-center animate-pulse'>
                   <div className='flex flex-column inline-block'>
                     <BiErrorCircle className='mt-1 mr-1'></BiErrorCircle>
-                    <p>{formik.errors.email}</p>
+                    <p>{formik?.errors?.email}</p>
                   </div>
                 </div>
               ) : (
@@ -210,15 +210,15 @@ const Register = () => {
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 id='password'
                 placeholder='Password'
-                value={formik.values.password}
+                value={formik?.values?.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.error || formik.errors.password ? (
+              {formik?.touched?.error || formik?.errors?.password ? (
                 <div className='my-2 bg-red-100 border-l-4 border-red-500 text-red-700 shadow rounded p-2 text-center animate-pulse'>
                   <div className='flex flex-column inline-block'>
                     <BiErrorCircle className='mt-1 mr-1'></BiErrorCircle>
-                    <p>{formik.errors.password}</p>
+                    <p>{formik?.errors?.password}</p>
                   </div>
                 </div>
               ) : (

@@ -28,6 +28,7 @@ const Layout = ({ children }) => {
           <div className='flex min-h-screen'>
             <Sidebar></Sidebar>
             <main className='sm:w-1/2 xl:w-4/5 sm:min-h-screen p-5'>
+              <Navbar></Navbar>
               {children}
             </main>
           </div>
