@@ -44,7 +44,7 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-
+        console.log(values);
         const { data } = await authenticateUser({
           variables: {
             authUserInput: {
@@ -65,6 +65,7 @@ const Login = () => {
           }, 2000);
         }
       } catch (error) {
+        console.log(error);
         setErrorMsg(error.message);
         setTimeout(() => {
           setErrorMsg(null);

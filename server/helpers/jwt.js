@@ -4,14 +4,17 @@ dotenv.config({ path: '.env' });
 
 export const createToken = async (user) => {
   const expiresIn = '24H';
-  const { id, email } = user;
-  const token = jwt.sign({ id, email }, process.env.SECRET_JWT, { expiresIn });
+  const { id, email, name, lastName } = user;
+  const token = jwt.sign(
+    { id, email, name, lastName },
+    process.env.SECRET_JWT,
+    { expiresIn }
+  );
   return token;
 };
 
 export const verifyToken = async (token) => {
   const user = jwt.verify(token, process.env.SECRET_JWT);
   if (!user) throw new Error('Invalid token.');
-  const { id, email } = user;
-  return { id, email };
+  return user;
 };

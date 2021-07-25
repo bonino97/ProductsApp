@@ -5,15 +5,14 @@ import { Product } from '../models/product.js';
 import { Client } from '../models/client.js';
 import { Order } from '../models/order.js';
 
-import { createToken, verifyToken } from '../helpers/jwt.js';
+import { createToken } from '../helpers/jwt.js';
 
 export const resolvers = {
   Query: {
     // User Queries
-    getUser: async (_, { token }) => {
+    getUser: async (_, __, authenticatedUser) => {
       try {
-        const user = await verifyToken(token);
-        return user;
+        return authenticatedUser;
       } catch (e) {
         console.error(e);
         throw new Error(e);
